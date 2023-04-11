@@ -42,7 +42,7 @@ function addTag(e){
 
         if(tag.length > 1 && !tags.includes(tag)){
             if(tags.length < 10){ //agregar numero maximo de etiquetas//
-                tag.split(' ').forEach(tag => { //se puede modificar por comas o espacios (',')
+                tag.split(',').forEach(tag => { //se puede modificar por comas o espacios (',')
                     tags.push(tag);
                     //console.log(tags);
                     createTag();
