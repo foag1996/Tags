@@ -1,25 +1,15 @@
 const input = document.querySelector(".input");
-
 const tags_box = document.querySelector(".tags");
 const tagCounter = document.querySelector("footer .counter");
 
-let maxTags = 10;
 let tags = [];
-
-countTag();
-
-function countTag(){ //contador de los tags
-    tagCounter.innerHTML = maxTags - tags.length;
-}
-
 
 function removeTag(element, tag){
     let index = tags.indexOf(tag);
     tags = [...tags.slice(0, index), ...tags.slice(index + 1)]; // copia de un arreglo desde el indice del inicio hasta el penúltimo final , excluyendo el final
     //console.log(tags)
-    element.parentElement.remove();
-    countTag();
-    
+    element.parentElement.remove();   
+    tagCounter.textContent = `${tags.length}`
 }
 
 function createTag(){
@@ -32,22 +22,22 @@ function createTag(){
                       </div>`;
         tags_box.insertAdjacentHTML('afterbegin', divTag)
     })
-    countTag();
+    tagCounter.textContent = `${tags.length}`
 }
 
 function addTag(e){
+    const val = input.value
     if(e.key=="Enter"){
         let tag = e.target.value.replace(/\s+/g, ' ' );
         //console.log(tag);
-
         if(tag.length > 1 && !tags.includes(tag)){
-            if(tags.length < 10){ //agregar numero maximo de etiquetas//
+            //if(tags.length < 10){ //agregar numero maximo de etiquetas//
                 tag.split(',').forEach(tag => { //se puede modificar por comas o espacios (',')
                     tags.push(tag);
                     //console.log(tags);
                     createTag();
                 });
-            }//fin agregar numero maximo de etiquetas//
+            //}//fin agregar numero maximo de etiquetas//
         }
         e.target.value = '';
     }
